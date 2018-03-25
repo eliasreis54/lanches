@@ -20,7 +20,7 @@ public class Ingredientes implements Serializable{
 	
 	private long id; 
 	private String nome;
-	private float valor;
+	private double valor;
 	private int estoqueAtual;
 	private Date dataCriacao;
 	private Date dataUltimaAtualizacao;
@@ -53,7 +53,7 @@ public class Ingredientes implements Serializable{
 	public double getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	

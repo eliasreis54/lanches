@@ -7,20 +7,13 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class LancheDTO {
-	private long ID;
 	private String nome;
-	private float valor;
+	private double valor;
 	private String descricao;
 
 	
 	public LancheDTO() {
 		super();
-	}
-	public long getID() {
-		return ID;
-	}
-	public void setID(long iD) {
-		ID = iD;
 	}
 	
 	@NotEmpty(message = "Nome do produto não pode ser vazio")
@@ -32,10 +25,10 @@ public class LancheDTO {
 		this.nome = nome;
 	}
 	@Min(value = 0, message = "O valor não pode ser 0")
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	
