@@ -1,9 +1,11 @@
 package com.eliasreis.Lanches.Controllers;
 
+import java.text.Normalizer;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.annotations.Target;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,6 +22,7 @@ import com.eliasreis.Lanches.DTOs.LancheDTO;
 import com.eliasreis.Lanches.Repositores.IngredientesRepositori;
 import com.eliasreis.Lanches.Response.Response;
 import com.eliasreis.Lanches.entities.Ingredientes;
+import com.mysql.jdbc.log.Log;
 
 /**
  * @author eliasreis
@@ -39,7 +43,6 @@ public class LancheController {
 	@PostMapping
 	public ResponseEntity<Response<LancheDTO>> CadastrarLanche(@Valid @RequestBody LancheDTO lanche,
 			BindingResult results) {
-		
 		Response<LancheDTO> response = new Response<LancheDTO>();
 		
 		if (results.hasErrors()){
@@ -75,8 +78,19 @@ public class LancheController {
 	 */
 	@GetMapping (value = "/{nome}")
 	public Ingredientes ProcuraPeloNome(@PathVariable("nome") String Nome) {
-		System.out.println(Nome);
-		Ingredientes ingrediente = IngredientesRepositori.findByNome(Nome);
+		String novo = Normalizer.normalize(Nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+		System.out.println(novo);
+		Ingredientes ingrediente = IngredientesRepositori.findByNome(novo);
 		return ingrediente;
+	}
+	
+	@PutMapping
+	public Ingredientes UpdateIngredientes(@RequestBody LancheDTO lancheUpdate) {
+		Ingredientes registroAtual = this.IngredientesRepositori.findOne(lancheUpdate.getiD());
+		registroAtual.setNome(lancheUpdate.getNome());
+		registroAtual.setValor(lancheUpdate.getValor());
+		registroAtual.setEstoqueAtual(lancheUpdate.getEstoque());
+		this.IngredientesRepositori.save(registroAtual);
+		return registroAtual;
 	}
 }

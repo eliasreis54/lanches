@@ -7,4 +7,5 @@ import com.eliasreis.Lanches.entities.*;
 
 public interface IngredientesRepositori extends JpaRepository<Ingredientes, Long>{
 	Ingredientes findByNome(String nome);
+	
 }

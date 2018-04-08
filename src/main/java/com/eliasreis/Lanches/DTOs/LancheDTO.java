@@ -7,13 +7,31 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class LancheDTO {
+	private long iD;
 	private String nome;
 	private double valor;
 	private String descricao;
+	private int estoque;
 
 	
+	public int getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
+	}
+
 	public LancheDTO() {
 		super();
+	}
+	
+	public long getiD() {
+		return iD;
+	}
+
+	public void setiD(long iD) {
+		this.iD = iD;
 	}
 	
 	@NotEmpty(message = "Nome do produto não pode ser vazio")
