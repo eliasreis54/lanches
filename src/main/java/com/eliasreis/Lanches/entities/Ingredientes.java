@@ -18,7 +18,7 @@ public class Ingredientes implements Serializable{
 
 	private static final long serialVersionUID = 4862991749577621407L;
 	
-	private long iD; 
+	private long id; 
 	private String nome;
 	private double valor;
 	private int estoqueAtual;
@@ -33,11 +33,11 @@ public class Ingredientes implements Serializable{
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	public long getId() {
-		return iD;
+		return id;
 	}
 	
 	public void setId(long id) {
-		this.iD = id;
+		this.id = id;
 	}
 	
 	@Column(name = "nome", nullable = false)
@@ -93,7 +93,7 @@ public class Ingredientes implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Ingredientes [id=" + iD + ", nome=" + nome + ", valor=" + valor + ", estoqueAtual=" + estoqueAtual
+		return "Ingredientes [id=" + id + ", nome=" + nome + ", valor=" + valor + ", estoqueAtual=" + estoqueAtual
 				+ "]";
 	}
 
