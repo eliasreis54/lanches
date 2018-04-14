@@ -2,9 +2,9 @@ package com.eliasreis.Lanches.security.services;
 
 import java.util.Optional;
 
-import com.eliasreis.Lanches.security.entities.Usuario;
+import com.eliasreis.Lanches.security.entities.User;
 
-public interface UsuarioService {
+public interface UserService {
 
 	/**
 	 * Busca e retorna um usuário dado um email.
@@ -12,6 +12,6 @@ public interface UsuarioService {
 	 * @param email
 	 * @return Optional<Usuario>
 	 */
-	Optional<Usuario> buscarPorEmail(String email);
+	Optional<User> buscarPorEmail(String email);
 
 }

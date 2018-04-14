@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.eliasreis.Lanches.security.entities.Usuario;
-import com.eliasreis.Lanches.security.enums.PerfilEnum;
+import com.eliasreis.Lanches.security.entities.User;
+import com.eliasreis.Lanches.security.enums.ProfileEnum;
 
 public class JwtUserFactory {
 
@@ -20,7 +20,7 @@ public class JwtUserFactory {
 	 * @param funcionario
 	 * @return JwtUser
 	 */
-	public static JwtUser create(Usuario usuario) {
+	public static JwtUser create(User usuario) {
 		return new JwtUser(usuario.getId(), usuario.getEmail(), usuario.getSenha(),
 				mapToGrantedAuthorities(usuario.getPerfil()));
 	}
@@ -31,7 +31,7 @@ public class JwtUserFactory {
 	 * @param perfilEnum
 	 * @return List<GrantedAuthority>
 	 */
-	private static List<GrantedAuthority> mapToGrantedAuthorities(PerfilEnum perfilEnum) {
+	private static List<GrantedAuthority> mapToGrantedAuthorities(ProfileEnum perfilEnum) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(perfilEnum.toString()));
 		return authorities;

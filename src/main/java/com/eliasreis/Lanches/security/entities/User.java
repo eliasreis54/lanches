@@ -11,20 +11,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.eliasreis.Lanches.security.enums.PerfilEnum;
+import com.eliasreis.Lanches.security.enums.ProfileEnum;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 306411570471828345L;
 
 	private Long id;
 	private String email;
 	private String senha;
-	private PerfilEnum perfil;
+	private ProfileEnum perfil;
 
-	public Usuario() {
+	public User() {
 	}
 
 	@Id
@@ -48,11 +48,11 @@ public class Usuario implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "perfil", nullable = false)
-	public PerfilEnum getPerfil() {
+	public ProfileEnum getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(PerfilEnum perfil) {
+	public void setPerfil(ProfileEnum perfil) {
 		this.perfil = perfil;
 	}
 

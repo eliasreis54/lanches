@@ -5,23 +5,23 @@ import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class LancheDTO {
+public class SnackDTO {
 	private long iD;
-	private String nome;
-	private double valor;
-	private String descricao;
-	private int estoque;
+	private String name;
+	private double price;
+	private String descripton;
+	private int stock;
 
 	
-	public int getEstoque() {
-		return estoque;
+	public int getStock() {
+		return stock;
 	}
 
-	public void setEstoque(int estoque) {
-		this.estoque = estoque;
+	public void setStock(int sotck) {
+		this.stock = stock;
 	}
 
-	public LancheDTO() {
+	public SnackDTO() {
 		super();
 	}
 	
@@ -36,24 +36,24 @@ public class LancheDTO {
 	@NotEmpty(message = "Nome do produto não pode ser vazio")
 	@Length(min = 5, max = 100, message = "O nome deve conter entre 5 e 100 caracteres")
 	public String getNome() {
-		return nome;
+		return name;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 	@Min(value = 0, message = "O valor não pode ser 0")
-	public double getValor() {
-		return valor;
+	public double getPrice() {
+		return price;
 	}
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 	@Length(min = 5, max = 100, message = "A descrição do produto deve conter entre 5 e 100 caracteres")
-	public String getDescricao() {
-		return descricao;
+	public String getDescripton() {
+		return descripton;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescription(String descripton) {
+		this.descripton = descripton;
 	}
 }

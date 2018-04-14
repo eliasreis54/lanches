@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "Ingredientes")
-public class Ingredientes implements Serializable{
+public class Ingredients implements Serializable{
 
 	private static final long serialVersionUID = 4862991749577621407L;
 	
@@ -26,7 +26,7 @@ public class Ingredientes implements Serializable{
 	private Date dataUltimaAtualizacao;
 	private String descricao;
 	
-	public Ingredientes() {
+	public Ingredients() {
 		super();
 	}
 	

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Cidade")
-public class Cidade implements Serializable {
+public class City implements Serializable {
 	private static final long serialVersionUID = 4862991749577621407L;
 	
 	private long id;

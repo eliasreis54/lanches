@@ -1,6 +1,6 @@
 package com.eliasreis.Lanches.security.enums;
 
-public enum PerfilEnum {
+public enum ProfileEnum {
 	ROLE_ADMIN,
 	ROLE_USUARIO;
 }

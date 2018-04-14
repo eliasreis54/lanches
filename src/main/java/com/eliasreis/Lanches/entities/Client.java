@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "Cliente")
-public class Clientes implements Serializable {
+public class Client implements Serializable {
 	private static final long serialVersionUID = 4862991749577621407L;
 	
 	private long id;
@@ -25,7 +25,7 @@ public class Clientes implements Serializable {
 	private String uf;
 	private int cpf;
 	
-	public Clientes() {
+	public Client() {
 		super();
 	}
 	
