@@ -7,10 +7,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 @Configuration
 public class InMemorySecurityConfig {
 
-	@Autowired
+	/*@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
 		builder
 		.inMemoryAuthentication()
 		.withUser("usuario").password("teste").roles("USER");
-	}
+	}*/
 }
