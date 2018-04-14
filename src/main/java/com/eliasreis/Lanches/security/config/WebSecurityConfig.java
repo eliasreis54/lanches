@@ -20,7 +20,6 @@ import com.eliasreis.Lanches.security.filters.JwtAuthenticationTokenFilter;
 
 @Configuration
 @EnableWebSecurity
-@CrossOrigin(origins = "*")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
