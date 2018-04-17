@@ -52,8 +52,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().cacheControl();
-		httpSecurity.exceptionHandling().and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll().antMatchers("/**")
-		.authenticated().and().httpBasic();
+		httpSecurity
+		.csrf().disable()
+		.authorizeRequests()
+		.antMatchers(HttpMethod.OPTIONS,"/").permitAll()//allow CORS option calls
+		.antMatchers("/resources/**").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		.formLogin()
+		.and()
+		.httpBasic();
 	}
 
 }
