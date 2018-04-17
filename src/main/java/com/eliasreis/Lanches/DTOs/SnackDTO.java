@@ -9,7 +9,7 @@ public class SnackDTO {
 	private long iD;
 	private String name;
 	private double price;
-	private String descripton;
+	private String description;
 	private int stock;
 
 	
@@ -51,9 +51,9 @@ public class SnackDTO {
 	
 	@Length(min = 5, max = 100, message = "A descrição do produto deve conter entre 5 e 100 caracteres")
 	public String getDescripton() {
-		return descripton;
+		return description;
 	}
 	public void setDescription(String descripton) {
-		this.descripton = descripton;
+		this.description = descripton;
 	}
 }

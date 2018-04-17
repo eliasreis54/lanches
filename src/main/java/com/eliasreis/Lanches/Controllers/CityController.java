@@ -39,7 +39,7 @@ public class CityController {
 		
 		City cidadesave = new City();
 		
-		cidadesave.setNome(cidade.getNome());
+		cidadesave.setNome(cidade.getName());
 		cidadesave.setUF(cidade.getUF());
 		this.cidadeRepositori.save(cidadesave);
 		response.setObjeto(cidade);
@@ -56,7 +56,7 @@ public class CityController {
 	@PutMapping
 	public City atualizaCidade(@RequestBody CityDTO cidadeUpdate){
 		City cidadeAtual = this.cidadeRepositori.findOne(cidadeUpdate.getiD());
-		cidadeAtual.setNome(cidadeUpdate.getNome());
+		cidadeAtual.setNome(cidadeUpdate.getName());
 		cidadeAtual.setUF(cidadeUpdate.getUF());
 		this.cidadeRepositori.save(cidadeAtual);
 		return cidadeAtual;

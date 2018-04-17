@@ -10,7 +10,7 @@ public class CityDTO {
 	
 	@NotEmpty(message = "Nome da cidade não pode ser vazio")
 	@Length(min = 2, max = 100, message = "O nome deve conter entre 2 e 100 caracteres")
-	public String getNome() {
+	public String getName() {
 		return name;
 	}
 	public void setNome(String nome) {
