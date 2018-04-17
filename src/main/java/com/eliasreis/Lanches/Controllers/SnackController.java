@@ -25,9 +25,9 @@ import com.eliasreis.Lanches.entities.Ingredients;
  * @author eliasreis
  *	Controller responsável por qualquer manipulação no cadastro de produto
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/lanches")
-@CrossOrigin(origins = "*")
 public class SnackController {
 	@Autowired
 	IngredientesRepositori IngredientesRepositori;
