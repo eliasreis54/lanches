@@ -21,7 +21,7 @@ import com.eliasreis.Lanches.entities.City;
 
 @RestController
 @RequestMapping("/api/cidades")
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CityController {
 	
 	@Autowired
