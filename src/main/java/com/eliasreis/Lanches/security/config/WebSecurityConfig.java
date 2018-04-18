@@ -1,5 +1,6 @@
 package com.eliasreis.Lanches.security.config;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -24,7 +24,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.eliasreis.Lanches.security.JwtAuthenticationEntryPoint;
 import com.eliasreis.Lanches.security.filters.JwtAuthenticationTokenFilter;
 
-import io.jsonwebtoken.lang.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -59,6 +58,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().cacheControl();
-		httpSecurity.cors().and();
 	}
+	
+	 @Bean
+	    CorsConfigurationSource corsConfigurationSource() {
+	        CorsConfiguration configuration = new CorsConfiguration();
+	        configuration.setAllowedOrigins(Arrays.asList("*"));
+	        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT"));
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", configuration);
+	        return source;
+	    }
 }
