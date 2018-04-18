@@ -21,7 +21,7 @@ import com.eliasreis.Lanches.entities.City;
 
 @RestController
 @RequestMapping("/api/cidades")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class CityController {
 	
 	@Autowired
