@@ -37,6 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	private List<String> method;
+
 	@Autowired
 	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
@@ -64,12 +66,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
-		List<String> method = null;
+		method = null;
 		method.add("GET");
 		method.add("POST");
 		method.add("PUT");
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowCredentials(true);
+		configuration.setAllowCredentials(false);
 		configuration.setAllowedMethods(method);
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
