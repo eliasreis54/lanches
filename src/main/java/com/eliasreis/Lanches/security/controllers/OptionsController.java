@@ -1,4 +1,4 @@
-package com.eliasreis.Lanches.Controllers;
+package com.eliasreis.Lanches.security.controllers;
 
 import java.io.IOException;
 
