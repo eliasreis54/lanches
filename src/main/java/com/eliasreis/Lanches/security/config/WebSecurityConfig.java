@@ -57,14 +57,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	 @Bean
 	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost"));
-		configuration.setAllowedMethods(Arrays.asList("GET, POST, DELETE, PUT, PATCH, HEAD", "OPTIONS"));
-		configuration.addAllowedHeader("Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin");
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+	        return source;
 	}
+	 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
@@ -72,7 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().cacheControl();
-		httpSecurity.cors().configurationSource(corsConfigurationSource());
+		httpSecurity.cors().and();
+		httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 	}
 	
 
