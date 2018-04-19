@@ -55,12 +55,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
 		return new JwtAuthenticationTokenFilter();
 	}
-	 @Bean
+	 /*@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 	        return source;
-	}
+	}*/
 	 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/auth/**").permitAll().anyRequest().authenticated();
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().cacheControl();
-		httpSecurity.cors().and();
+		//httpSecurity.cors().and();
 		httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
 	}
 	
