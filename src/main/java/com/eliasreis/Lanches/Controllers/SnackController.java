@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scripting.config.LangNamespaceHandler;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,8 +57,9 @@ public class SnackController {
 		ingrediente.setNome(lanche.getNome());
 		ingrediente.setDescricao(lanche.getDescripton());
 		ingrediente.setValor(lanche.getPrice());
-		
 		this.IngredientesRepositori.save(ingrediente);
+		ingrediente = this.IngredientesRepositori.findByNome(lanche.getNome());
+		lanche.setiD(ingrediente.getId());
 		response.setObjeto(lanche);
 		return ResponseEntity.ok(response);
 	}
@@ -88,7 +93,22 @@ public class SnackController {
 		registroAtual.setNome(lancheUpdate.getNome());
 		registroAtual.setValor(lancheUpdate.getPrice());
 		registroAtual.setEstoqueAtual(lancheUpdate.getStock());
+		registroAtual.setDescricao(lancheUpdate.getDescripton());
 		this.IngredientesRepositori.save(registroAtual);
 		return registroAtual;
+	}
+	
+	@DeleteMapping (value = "/{iD}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public String DeleteIngredientes(@PathVariable("iD") long productID) {
+		Ingredients registroAtual = this.IngredientesRepositori.findOne(productID);
+		if (registroAtual != null) {
+			IngredientesRepositori.delete(productID);
+			return "Product deleted successfully";	
+		}
+		else
+		{
+			return "Unable delete product";
+		}
 	}
 }

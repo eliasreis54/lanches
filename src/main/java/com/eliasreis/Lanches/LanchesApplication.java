@@ -13,8 +13,29 @@ import com.eliasreis.Lanches.security.repositories.UserRepository;
 
 @SpringBootApplication
 public class LanchesApplication {
+	@Autowired
+	private UserRepository usuarioRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(LanchesApplication.class, args);
+	}
+	
+	@Bean
+	public CommandLineRunner commandLineRunner() {
+		return args -> {
+			
+			/*User usuario = new User();
+			usuario.setEmail("teste@email.com");
+			usuario.setPerfil(ProfileEnum.ROLE_USUARIO);
+			usuario.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			this.usuarioRepository.save(usuario);
+			
+			User admin = new User();
+			admin.setEmail("admin@email.com");
+			admin.setPerfil(ProfileEnum.ROLE_ADMIN);
+			admin.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			this.usuarioRepository.save(admin);*/
+			
+		};
 	}
 }

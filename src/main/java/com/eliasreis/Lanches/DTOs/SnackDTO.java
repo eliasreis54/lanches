@@ -10,15 +10,15 @@ public class SnackDTO {
 	private String name;
 	private double price;
 	private String description;
-	private int stock;
+	private int inventory;
 
 	
 	public int getStock() {
-		return stock;
+		return inventory;
 	}
 
 	public void setStock(int sotck) {
-		this.stock = stock;
+		this.inventory = inventory;
 	}
 
 	public SnackDTO() {
