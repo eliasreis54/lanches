@@ -5,10 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scripting.config.LangNamespaceHandler;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.eliasreis.Lanches.DTOs.SnackDTO;
-import com.eliasreis.Lanches.Repositores.IngredientesRepositori;
+import com.eliasreis.Lanches.Repositores.ingredientRepositori;
 import com.eliasreis.Lanches.Response.Response;
 import com.eliasreis.Lanches.entities.Ingredients;
 
@@ -31,19 +29,19 @@ import com.eliasreis.Lanches.entities.Ingredients;
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/lanches")
+@RequestMapping("/api/snacks")
 public class SnackController {
 	@Autowired
-	IngredientesRepositori IngredientesRepositori;
+	ingredientRepositori IngredientRepositori;
 	
 	/**
 	 * Método utilizado para cadastrar um novo ingrediente
-	 * @param lanche recebido em json com os seguintes parâmetros 	"nome" : "Pão frances ",	"valor" : 0.40, 	"descricao" : "      "
+	 * @param snack recebido em json com os seguintes parâmetros 	"nome" : "Pão frances ",	"valor" : 0.40, 	"descricao" : "      "
 	 * @param results
 	 * @return Lanche DTO
 	 */
 	@PostMapping
-	public ResponseEntity<Response<SnackDTO>> CadastrarLanche(@Valid @RequestBody SnackDTO lanche,
+	public ResponseEntity<Response<SnackDTO>> RegisterLanche(@Valid @RequestBody SnackDTO snack,
 			BindingResult results) {
 		Response<SnackDTO> response = new Response<SnackDTO>();
 		
@@ -52,15 +50,15 @@ public class SnackController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		Ingredients ingrediente = new Ingredients();
+		Ingredients ingredient = new Ingredients();
 		
-		ingrediente.setNome(lanche.getNome());
-		ingrediente.setDescricao(lanche.getDescripton());
-		ingrediente.setValor(lanche.getPrice());
-		this.IngredientesRepositori.save(ingrediente);
-		ingrediente = this.IngredientesRepositori.findByNome(lanche.getNome());
-		lanche.setiD(ingrediente.getId());
-		response.setObjeto(lanche);
+		ingredient.setName(snack.getNome());
+		ingredient.setDescription(snack.getDescripton());
+		ingredient.setPrice(snack.getPrice());
+		this.IngredientRepositori.save(ingredient);
+		ingredient = this.IngredientRepositori.findByNome(snack.getNome());
+		snack.setiD(ingredient.getId());
+		response.setObjeto(snack);
 		return ResponseEntity.ok(response);
 	}
 	
@@ -69,9 +67,9 @@ public class SnackController {
 	 * @return Lista de ingredientes
 	 */
 	@GetMapping
-	public List<Ingredients> RetornaTodas() {
-		List<Ingredients> ingrediente = IngredientesRepositori.findAll();
-		return ingrediente;
+	public List<Ingredients> ReturnAll() {
+		List<Ingredients> ingredient = IngredientRepositori.findAll();
+		return ingredient;
 	}
 	
 	/**
@@ -80,30 +78,30 @@ public class SnackController {
 	 * @return ingrediente solicidato 
 	 */
 	@GetMapping (value = "/{nome}")
-	public Ingredients ProcuraPeloNome(@PathVariable("nome") String Nome) {
-		String novo = Normalizer.normalize(Nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-		System.out.println(novo);
-		Ingredients ingrediente = IngredientesRepositori.findByNome(novo);
-		return ingrediente;
+	public Ingredients FindByName(@PathVariable("nome") String Nome) {
+		String newIngredient = Normalizer.normalize(Nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+		System.out.println(newIngredient);
+		Ingredients ingredient = IngredientRepositori.findByNome(newIngredient);
+		return ingredient;
 	}
 	
 	@PutMapping
-	public Ingredients UpdateIngredientes(@RequestBody SnackDTO lancheUpdate) {
-		Ingredients registroAtual = this.IngredientesRepositori.findOne(lancheUpdate.getiD());
-		registroAtual.setNome(lancheUpdate.getNome());
-		registroAtual.setValor(lancheUpdate.getPrice());
-		registroAtual.setEstoqueAtual(lancheUpdate.getStock());
-		registroAtual.setDescricao(lancheUpdate.getDescripton());
-		this.IngredientesRepositori.save(registroAtual);
-		return registroAtual;
+	public Ingredients UpdateIngrediente(@RequestBody SnackDTO lancheUpdate) {
+		Ingredients currentRecord = this.IngredientRepositori.findOne(lancheUpdate.getiD());
+		currentRecord.setName(lancheUpdate.getNome());
+		currentRecord.setPrice(lancheUpdate.getPrice());
+		currentRecord.setCurrentInventory(lancheUpdate.getStock());
+		currentRecord.setDescription(lancheUpdate.getDescripton());
+		this.IngredientRepositori.save(currentRecord);
+		return currentRecord;
 	}
 	
 	@DeleteMapping (value = "/{iD}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public String DeleteIngredientes(@PathVariable("iD") long productID) {
-		Ingredients registroAtual = this.IngredientesRepositori.findOne(productID);
-		if (registroAtual != null) {
-			IngredientesRepositori.delete(productID);
+	public String DeleteIngrediente(@PathVariable("iD") long productID) {
+		Ingredients currentRecord = this.IngredientRepositori.findOne(productID);
+		if (currentRecord != null) {
+			IngredientRepositori.delete(productID);
 			return "Product deleted successfully";	
 		}
 		else

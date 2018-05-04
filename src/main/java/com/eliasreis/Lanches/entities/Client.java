@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,7 @@ public class Client implements Serializable {
 	private String bairro;
 	private String numero;
 	private int cep;
-	private int cidade;
+	private City city;
 	private String uf;
 	private int cpf;
 	
@@ -87,13 +88,14 @@ public class Client implements Serializable {
 	public void setCEP(int cep) {
 		this.cep = cep;
 	}
-	@Column(name = "cidade", nullable = false)
-	public int getCidade() {
-		return cidade;
+	
+	@OneToOne
+	public City getCidade() {
+		return city;
 	}
 
-	public void setCidade(int cidade) {
-		this.cidade = cidade;
+	public void setCidade(City cidade) {
+		this.city = cidade;
 	}
 	@Column(name = "UF", nullable = false)
 	public String getUF() {

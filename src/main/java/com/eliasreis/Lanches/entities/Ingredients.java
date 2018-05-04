@@ -41,53 +41,53 @@ public class Ingredients implements Serializable{
 	}
 	
 	@Column(name = "nome", nullable = false)
-	public String getNome() {
+	public String getName() {
 		return nome;
 	}
 	
-	public void setNome(String nome) {
+	public void setName(String nome) {
 		this.nome = nome;
 	}
 	
 	@Column(name = "valor", nullable = false)
-	public double getValor() {
+	public double getPrice() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setPrice(double valor) {
 		this.valor = valor;
 	}
 	
 	@Column(name = "estoque_atual", nullable = false)
-	public int getEstoqueAtual() {
+	public int getCurrentInventory() {
 		return estoqueAtual;
 	}
 	
-	public void setEstoqueAtual(int estoqueAtual) {
+	public void setCurrentInventory(int estoqueAtual) {
 		this.estoqueAtual = estoqueAtual;
 	}
 	
 	@Column(name = "data_criacao", nullable = false)
-	public Date getDataCriacao() {
+	public Date getCreateDate() {
 		return dataCriacao;
 	}
-	public void setDataCriacao(Date dataCriacao) {
+	public void setCreateDate(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 	
 	@Column(name = "data_atualizacao", nullable = false)
-	public Date getDataUltimaAtualizacao() {
+	public Date getLastUpdate() {
 		return dataUltimaAtualizacao;
 	}
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+	public void setLastUpdate(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 	
 	@Column(name = "descricao", nullable = false)
-	public String getDescricao() {
+	public String getDescription() {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescription(String descricao) {
 		this.descricao = descricao;
 	}
 
