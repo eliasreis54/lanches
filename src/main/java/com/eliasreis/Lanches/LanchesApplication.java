@@ -14,7 +14,6 @@ import com.eliasreis.Lanches.security.enums.ProfileEnum;
 import com.eliasreis.Lanches.security.repositories.UserRepository;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class LanchesApplication {
 	@Autowired
 	private UserRepository usuarioRepository;
