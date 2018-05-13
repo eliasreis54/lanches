@@ -24,7 +24,7 @@ public class LanchesApplication {
 	public CommandLineRunner commandLineRunner() {
 		return args -> {
 			
-			/*User usuario = new User();
+			User usuario = new User();
 			usuario.setEmail("teste@email.com");
 			usuario.setPerfil(ProfileEnum.ROLE_USUARIO);
 			usuario.setSenha(PasswordUtils.gerarBCrypt("123456"));
@@ -34,7 +34,7 @@ public class LanchesApplication {
 			admin.setEmail("admin@email.com");
 			admin.setPerfil(ProfileEnum.ROLE_ADMIN);
 			admin.setSenha(PasswordUtils.gerarBCrypt("123456"));
-			this.usuarioRepository.save(admin);*/
+			this.usuarioRepository.save(admin);
 			
 		};
 	}

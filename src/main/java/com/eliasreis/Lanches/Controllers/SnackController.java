@@ -56,7 +56,7 @@ public class SnackController {
 		ingredient.setDescription(snack.getDescripton());
 		ingredient.setPrice(snack.getPrice());
 		this.IngredientRepositori.save(ingredient);
-		ingredient = this.IngredientRepositori.findByNome(snack.getNome());
+		ingredient = this.IngredientRepositori.findByName(snack.getNome());
 		snack.setiD(ingredient.getId());
 		response.setObjeto(snack);
 		return ResponseEntity.ok(response);
@@ -81,7 +81,7 @@ public class SnackController {
 	public Ingredients FindByName(@PathVariable("nome") String Nome) {
 		String newIngredient = Normalizer.normalize(Nome, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 		System.out.println(newIngredient);
-		Ingredients ingredient = IngredientRepositori.findByNome(newIngredient);
+		Ingredients ingredient = IngredientRepositori.findByName(newIngredient);
 		return ingredient;
 	}
 	
