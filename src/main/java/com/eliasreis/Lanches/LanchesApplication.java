@@ -3,7 +3,9 @@ package com.eliasreis.Lanches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import com.eliasreis.Lanches.Utils.PasswordUtils;
@@ -12,6 +14,7 @@ import com.eliasreis.Lanches.security.enums.ProfileEnum;
 import com.eliasreis.Lanches.security.repositories.UserRepository;
 
 @SpringBootApplication
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class LanchesApplication {
 	@Autowired
 	private UserRepository usuarioRepository;
